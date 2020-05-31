@@ -35,7 +35,9 @@ export default class ActionButtonItem extends Component {
       activeOpacity: DEFAULT_ACTIVE_OPACITY,
       fixNativeFeedbackRadius: false,
       nativeFeedbackRippleColor: "rgba(255,255,255,0.75)",
-      numberOfLines: 1,
+      hideButton: false,
+      customItemStyle: null,
+      customItemTitleStyle: null
     };
   }
 
@@ -46,7 +48,9 @@ export default class ActionButtonItem extends Component {
       fixNativeFeedbackRadius: PropTypes.bool,
       nativeFeedbackRippleColor: PropTypes.string,
       activeOpacity: PropTypes.number,
-      numberOfLines: PropTypes.number,
+      hideButton: PropTypes.bool,
+      customItemStyle: PropTypes.any,
+      customItemTitleStyle: PropTypes.any
     };
   }
 
@@ -56,7 +60,11 @@ export default class ActionButtonItem extends Component {
       position,
       verticalOrientation,
       hideShadow,
-      spacing
+      spacing,
+      hideButton,
+      title,
+      customItemStyle,
+      customItemTitleStyle
     } = this.props;
 
     if (!this.props.active) return null;
@@ -103,14 +111,20 @@ export default class ActionButtonItem extends Component {
           paddingHorizontal: this.props.offsetX,
           height: size + SHADOW_SPACE + spacing
         };
+    const itemStyle = [{ marginBottom: spacing,
+      right: this.props.offsetX , alignSelf: 'flex-end'}, customItemStyle ]
+    const finallyStyle = hideButton ? itemStyle : parentStyle
     return (
       <Animated.View
         pointerEvents="box-none"
-        style={[animatedViewStyle, parentStyle]}
+        style={[animatedViewStyle, finallyStyle ]}
       >
         <View>
+        { hideButton ? (
+            <Text style={customItemTitleStyle} >{title}</Text>
+
+        ) : (          
           <Touchable
-            rejectResponderTermination
             testID={this.props.testID}
             accessibilityLabel={this.props.accessibilityLabel}
             background={touchableBackground(
@@ -127,8 +141,9 @@ export default class ActionButtonItem extends Component {
               {this.props.children}
             </View>
           </Touchable>
+        )}
         </View>
-        {this._renderTitle()}
+        {!hideButton &&  this._renderTitle() }
       </Animated.View>
     );
   }
@@ -143,8 +158,7 @@ export default class ActionButtonItem extends Component {
       parentSize,
       size,
       position,
-      spaceBetween,
-      numberOfLines,
+      spaceBetween
     } = this.props;
     const offsetTop = Math.max(size / 2 - TEXT_HEIGHT / 2, 0);
     const positionStyles = { top: offsetTop };
@@ -173,7 +187,6 @@ export default class ActionButtonItem extends Component {
         <Text
           allowFontScaling={false}
           style={[styles.text, this.props.textStyle]}
-          numberOfLines={numberOfLines}
         >
           {this.props.title}
         </Text>
@@ -182,7 +195,6 @@ export default class ActionButtonItem extends Component {
 
     return (
       <TextTouchable
-        rejectResponderTermination
         background={touchableBackground(
           this.props.nativeFeedbackRippleColor,
           this.props.fixNativeFeedbackRadius
