@@ -35,6 +35,7 @@ thêm props để có thể custom button item
       />
         
 ```
+![Screenshot](custom_item.png)
 
 ### Known Issues
 - Doesn't Work While Android Debugging. See issue [#79](https://github.com/mastermoo/react-native-action-button/issues/79).
