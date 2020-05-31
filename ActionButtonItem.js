@@ -121,8 +121,14 @@ export default class ActionButtonItem extends Component {
       >
         <View>
         { hideButton ? (
-            <Text style={customItemTitleStyle} >{title}</Text>
-
+          <Touchable
+            testID={this.props.testID}
+            accessibilityLabel={this.props.accessibilityLabel}
+            activeOpacity={this.props.activeOpacity || DEFAULT_ACTIVE_OPACITY}
+            onPress={this.props.onPress}
+          >
+          <Text style={customItemTitleStyle} >{title}</Text>
+          </Touchable>
         ) : (          
           <Touchable
             testID={this.props.testID}
