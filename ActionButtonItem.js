@@ -54,8 +54,6 @@ export default class ActionButtonItem extends Component {
     };
   }
 
-  // thêm 3 props hideButton , customItemStyle , customItemTitleStyle
-
   render() {
     const {
       size,
@@ -114,7 +112,7 @@ export default class ActionButtonItem extends Component {
           height: size + SHADOW_SPACE + spacing
         };
     const itemStyle = [{ marginBottom: spacing,
-      right: this.props.offsetX , alignSelf: 'flex-end'}, customItemStyle ]
+      right: this.props.offsetX , alignSelf: 'flex-end',}, customItemStyle ]
     const finallyStyle = hideButton ? itemStyle : parentStyle
     return (
       <Animated.View
@@ -128,6 +126,7 @@ export default class ActionButtonItem extends Component {
             accessibilityLabel={this.props.accessibilityLabel}
             activeOpacity={this.props.activeOpacity || DEFAULT_ACTIVE_OPACITY}
             onPress={this.props.onPress}
+            style={{flex: 1, justifyContent: 'center', paddingHorizontal: 30}}
           >
           <Text style={customItemTitleStyle} >{title}</Text>
           </Touchable>
