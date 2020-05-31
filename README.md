@@ -1,10 +1,40 @@
 # react-native-action-button
 customizable multi-action-button component for react-native
 
+
+
 ![react-native-action-button demo](http://i.giphy.com/26BkMir9IcAhqe4EM.gif)
 ![react-native-action-button demo](http://i.giphy.com/xTcnTeW9BBXh8wMhLq.gif)
 ![react-native-action-button demo](http://i.giphy.com/l0K7psuhDQGLeT3d6.gif)
 ![react-native-action-button demo](http://i.giphy.com/xTcnSOtuet39cM46s0.gif)
+
+
+thêm props để có thể custom button item 
+```js
+      <ActionButton.Item
+        title="Notifications"
+        hideButton
+        onPress={() => {}}
+        customItemStyle={{
+          height: 40,
+          borderRadius: 10,
+          backgroundColor: '#87dcdf',
+          shadowColor: 'rgba(0, 0, 0, 0.1)',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowRadius: 10,
+          shadowOpacity: 1,
+          justifyContent: 'center',
+          paddingHorizontal: 30,
+        }}
+        customItemTitleStyle={{
+          color: 'white',
+        }}
+      />
+        
+```
 
 ### Known Issues
 - Doesn't Work While Android Debugging. See issue [#79](https://github.com/mastermoo/react-native-action-button/issues/79).
@@ -35,7 +65,6 @@ import ActionButton from 'react-native-action-button';
 
 ##### ActionButton.Item
 `ActionButton.Item` specifies an Action Button. You have to include at least 1 `ActionButton.Item`.
-
 
 ### Example
 _The following Basic example can be found in `example/Basic`._
