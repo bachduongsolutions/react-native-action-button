@@ -54,6 +54,8 @@ export default class ActionButtonItem extends Component {
     };
   }
 
+  // thêm 3 props hideButton , customItemStyle , customItemTitleStyle
+
   render() {
     const {
       size,
